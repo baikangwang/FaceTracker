@@ -19,21 +19,15 @@ namespace FaceTracker
         #region private fields
         private VideoCapture _capture = null;
         private bool _captureInProgress;
-        private Mat _frame;
-        // private Mat _grayFrame;
-        // private Mat _smallGrayFrame;
-        // private Mat _smoothedGrayFrame;
-        // private Mat _cannyFrame;
         #endregion
         public Form1()
         {
             InitializeComponent();
-            // CvInvoke.UseOpenCL = false;
+            CvInvoke.UseOpenCL = false;
             try
             {
                 _capture = new VideoCapture();
-                // _capture.ImageGrabbed += ProcessFrame;
-                // Application.Idle += DrawFace;
+
             }
             catch (NullReferenceException excpt)
             {
@@ -43,21 +37,17 @@ namespace FaceTracker
             rbCapture.Checked = true;
             gbFaceRec.Enabled = false;
 
-             _frame = new Mat();
-            // _grayFrame = new Mat();
-            // _smallGrayFrame = new Mat();
-            // _smoothedGrayFrame = new Mat();
-            // _cannyFrame = new Mat();
         }
 
         private void DrawFace(object sender,EventArgs e)
         {
-            _frame = _capture.QueryFrame();
+            var frame = _capture.QueryFrame();
+
             var objFace = new
             {
                 ArrFileName = "haarcascade_frontalface_default.xml",
                 Rectangles = new List<Rectangle>(),
-                Color = Color.Red
+                Color = Color.Yellow
             };
 
             var objOthers = new List<dynamic>();
@@ -66,7 +56,7 @@ namespace FaceTracker
                 {
                     ArrFileName = "haarcascade_eye.xml",
                     Rectangles = new List<Rectangle>(),
-                    Color = Color.Blue
+                    Color = Color.Red
                 });
 
             if (ckbNose.Checked)
@@ -82,21 +72,27 @@ namespace FaceTracker
                 {
                     ArrFileName = "haarcascade_mouth.xml",
                     Rectangles = new List<Rectangle>(),
-                    Color = Color.Yellow
+                    Color = Color.Blue
                 });
 
 
             // recognize dynamic
 
-            DetectFace.Detect(_frame, objFace, objOthers);
+            DetectFace.Detect(frame, objFace, objOthers);
 
             foreach (Rectangle face in objFace.Rectangles)
             {
-                CvInvoke.Rectangle(_frame, face, new Bgr(objFace.Color).MCvScalar, 2);
+                CvInvoke.Rectangle(frame, face, new Bgr(objFace.Color).MCvScalar, 2);
 
                 if (ckbPreview.Checked)
                 {
-                    Mat capturedFace = new Mat(_frame, face);
+                    Mat capturedFace = new Mat(frame, face);
+                    if (ckbGray.Checked)
+                    {
+                        var gray = new Mat();
+                        CvInvoke.CvtColor(capturedFace, gray, ColorConversion.Bgr2Gray);
+                        capturedFace = gray;
+                    }
                     imgPreview.Image = capturedFace;
                 }
             }
@@ -104,34 +100,14 @@ namespace FaceTracker
             {
                 foreach (var objOtherRect in  objOther.Rectangles)
                 {
-                    CvInvoke.Rectangle(_frame, objOtherRect, new Bgr(objOther.Color).MCvScalar, 2);
+                    CvInvoke.Rectangle(frame, objOtherRect, new Bgr(objOther.Color).MCvScalar, 2);
                 }
             }
 
-            imgCapture.Image = _frame;
-        }
-
-        private void ProcessFrame(object sender, EventArgs arg)
-        {
-            if (_capture != null && _capture.Ptr != IntPtr.Zero)
+            if (ckbGray.Checked)
             {
-                _capture.Retrieve(_frame, 0);
-             //   _frame = _capture.QueryFrame();
-                
-             //   List<Rectangle> faces = new List<Rectangle>();
-             //   List<Rectangle> eyes = new List<Rectangle>();
-             //   //long detectionTime;
-             //   DetectFace.Detect(
-             //       _frame, "haarcascade_frontalface_default.xml", "haarcascade_eye.xml",
-             //       faces, eyes); /*,
-             //out detectionTime);*/
-
-             //   foreach (Rectangle face in faces)
-             //       CvInvoke.Rectangle(_frame, face, new Bgr(Color.Red).MCvScalar, 2);
-             //   foreach (Rectangle eye in eyes)
-             //       CvInvoke.Rectangle(_frame, eye, new Bgr(Color.Blue).MCvScalar, 2);
-                
-
+                var grayFrame = new Mat();
+                CvInvoke.CvtColor(frame, grayFrame, ColorConversion.Bgr2Gray);
                 /* The Capture example codes
                 // CvInvoke.CvtColor(_frame, _grayFrame, ColorConversion.Bgr2Gray);
 
@@ -142,13 +118,18 @@ namespace FaceTracker
                 // CvInvoke.Canny(_smoothedGrayFrame, _cannyFrame, 100, 60);
                  * */
 
-                imgCapture.Image = _frame;
+                frame = grayFrame;
+            }
+            imgCapture.Image = frame;
+        }
 
-                /* The Capture example codes
-                // grayscaleImageBox.Image = _grayFrame;
-                // smoothedGrayscaleImageBox.Image = _smoothedGrayFrame;
-                // cannyImageBox.Image = _cannyFrame;
-                 */
+        private void ProcessFrame(object sender, EventArgs arg)
+        {
+            if (_capture != null && _capture.Ptr != IntPtr.Zero)
+            {
+                var frame=new Mat();
+                _capture.Retrieve(frame, 0);
+                imgCapture.Image = frame;
             }
         }
 
