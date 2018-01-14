@@ -36,32 +36,35 @@
             this.btnCapture = new System.Windows.Forms.Button();
             this.gbOptions = new System.Windows.Forms.GroupBox();
             this.gbFaceRec = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ckbGray = new System.Windows.Forms.CheckBox();
             this.ckbPreview = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.imgPreview = new Emgu.CV.UI.ImageBox();
-            this.ckbMouth = new System.Windows.Forms.CheckBox();
-            this.ckbNose = new System.Windows.Forms.CheckBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ckbEyes = new System.Windows.Forms.CheckBox();
+            this.ckbNose = new System.Windows.Forms.CheckBox();
+            this.ckbMouth = new System.Windows.Forms.CheckBox();
             this.rbFaceRec = new System.Windows.Forms.RadioButton();
             this.gbCapture = new System.Windows.Forms.GroupBox();
             this.rbCapture = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ckbGray = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgCapture)).BeginInit();
             this.gbOptions.SuspendLayout();
             this.gbFaceRec.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).BeginInit();
-            this.gbCapture.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gbCapture.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.imgCapture);
             this.panel1.Location = new System.Drawing.Point(12, 12);
@@ -75,6 +78,7 @@
             this.imgCapture.Location = new System.Drawing.Point(0, 0);
             this.imgCapture.Name = "imgCapture";
             this.imgCapture.Size = new System.Drawing.Size(540, 431);
+            this.imgCapture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgCapture.TabIndex = 2;
             this.imgCapture.TabStop = false;
             // 
@@ -110,6 +114,7 @@
             // 
             // gbOptions
             // 
+            this.gbOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbOptions.Controls.Add(this.gbFaceRec);
             this.gbOptions.Controls.Add(this.rbFaceRec);
             this.gbOptions.Controls.Add(this.gbCapture);
@@ -131,15 +136,28 @@
             this.gbFaceRec.TabIndex = 7;
             this.gbFaceRec.TabStop = false;
             // 
-            // btnSave
+            // groupBox2
             // 
-            this.btnSave.Location = new System.Drawing.Point(77, 179);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(155, 23);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.groupBox2.Controls.Add(this.ckbGray);
+            this.groupBox2.Controls.Add(this.ckbPreview);
+            this.groupBox2.Controls.Add(this.panel2);
+            this.groupBox2.Controls.Add(this.btnSave);
+            this.groupBox2.Location = new System.Drawing.Point(11, 73);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(237, 214);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Face Detect";
+            // 
+            // ckbGray
+            // 
+            this.ckbGray.AutoSize = true;
+            this.ckbGray.Location = new System.Drawing.Point(6, 42);
+            this.ckbGray.Name = "ckbGray";
+            this.ckbGray.Size = new System.Drawing.Size(48, 17);
+            this.ckbGray.TabIndex = 6;
+            this.ckbGray.Text = "Gray";
+            this.ckbGray.UseVisualStyleBackColor = true;
             // 
             // ckbPreview
             // 
@@ -167,18 +185,41 @@
             this.imgPreview.Location = new System.Drawing.Point(0, 0);
             this.imgPreview.Name = "imgPreview";
             this.imgPreview.Size = new System.Drawing.Size(153, 153);
+            this.imgPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgPreview.TabIndex = 2;
             this.imgPreview.TabStop = false;
             // 
-            // ckbMouth
+            // btnSave
             // 
-            this.ckbMouth.AutoSize = true;
-            this.ckbMouth.Location = new System.Drawing.Point(118, 19);
-            this.ckbMouth.Name = "ckbMouth";
-            this.ckbMouth.Size = new System.Drawing.Size(56, 17);
-            this.ckbMouth.TabIndex = 2;
-            this.ckbMouth.Text = "Mouth";
-            this.ckbMouth.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(77, 179);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(155, 23);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ckbEyes);
+            this.groupBox1.Controls.Add(this.ckbNose);
+            this.groupBox1.Controls.Add(this.ckbMouth);
+            this.groupBox1.Location = new System.Drawing.Point(11, 19);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(237, 48);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Features";
+            // 
+            // ckbEyes
+            // 
+            this.ckbEyes.AutoSize = true;
+            this.ckbEyes.Location = new System.Drawing.Point(6, 19);
+            this.ckbEyes.Name = "ckbEyes";
+            this.ckbEyes.Size = new System.Drawing.Size(49, 17);
+            this.ckbEyes.TabIndex = 0;
+            this.ckbEyes.Text = "Eyes";
+            this.ckbEyes.UseVisualStyleBackColor = true;
             // 
             // ckbNose
             // 
@@ -190,15 +231,15 @@
             this.ckbNose.Text = "Nose";
             this.ckbNose.UseVisualStyleBackColor = true;
             // 
-            // ckbEyes
+            // ckbMouth
             // 
-            this.ckbEyes.AutoSize = true;
-            this.ckbEyes.Location = new System.Drawing.Point(6, 19);
-            this.ckbEyes.Name = "ckbEyes";
-            this.ckbEyes.Size = new System.Drawing.Size(49, 17);
-            this.ckbEyes.TabIndex = 0;
-            this.ckbEyes.Text = "Eyes";
-            this.ckbEyes.UseVisualStyleBackColor = true;
+            this.ckbMouth.AutoSize = true;
+            this.ckbMouth.Location = new System.Drawing.Point(118, 19);
+            this.ckbMouth.Name = "ckbMouth";
+            this.ckbMouth.Size = new System.Drawing.Size(56, 17);
+            this.ckbMouth.TabIndex = 2;
+            this.ckbMouth.Text = "Mouth";
+            this.ckbMouth.UseVisualStyleBackColor = true;
             // 
             // rbFaceRec
             // 
@@ -235,41 +276,6 @@
             this.rbCapture.UseVisualStyleBackColor = true;
             this.rbCapture.CheckedChanged += new System.EventHandler(this.rbCapture_CheckedChanged);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ckbEyes);
-            this.groupBox1.Controls.Add(this.ckbNose);
-            this.groupBox1.Controls.Add(this.ckbMouth);
-            this.groupBox1.Location = new System.Drawing.Point(11, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 48);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Features";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.ckbGray);
-            this.groupBox2.Controls.Add(this.ckbPreview);
-            this.groupBox2.Controls.Add(this.panel2);
-            this.groupBox2.Controls.Add(this.btnSave);
-            this.groupBox2.Location = new System.Drawing.Point(11, 73);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(237, 214);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Face Detect";
-            // 
-            // ckbGray
-            // 
-            this.ckbGray.AutoSize = true;
-            this.ckbGray.Location = new System.Drawing.Point(6, 42);
-            this.ckbGray.Name = "ckbGray";
-            this.ckbGray.Size = new System.Drawing.Size(48, 17);
-            this.ckbGray.TabIndex = 6;
-            this.ckbGray.Text = "Gray";
-            this.ckbGray.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -286,13 +292,13 @@
             this.gbOptions.ResumeLayout(false);
             this.gbOptions.PerformLayout();
             this.gbFaceRec.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).EndInit();
-            this.gbCapture.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgPreview)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.gbCapture.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
